@@ -70,6 +70,22 @@ var GetAllPreviousGamesByPlayerID = async (req, res)=>{
     }else{
         res.status(400).send("there is no games !");
     }
+    var GetAllNextGamesByPlayerID = async (req, res)=>{
+        let games = await PlayerServices.GetAllNextGamesByPlayerID(req.params.id)
+        if(games){
+            res.status(201).json(games);
+        }else{
+            res.status(400).send("there is no games !");
+        }
+    };
+    var GetAllPreviousGamesByPlayerID = async (req, res)=>{
+        let games = await PlayerServices.GetAllPreviousGamesByPlayerID(req.params.id)
+        if(games){
+            res.status(201).json(games);
+        }else{
+            res.status(400).send("there is no games !");
+        }
+    };
 };
 module.exports = {
     GetAllPlayers,
@@ -78,6 +94,13 @@ module.exports = {
     UpdatePlayer,
     DeletePlayer,
     GetAllGamesByPlayerID,
-    GetAllNextGamesByPlayerID,
-    GetAllPreviousGamesByPlayerID
+    UpdateImage,
+    ChangeSatus,
+    ResetPassword,
+    SendEmailPw,
+    GetAllPreviousGamesByPlayerID,
+    GetAllNextGamesByPlayerID
+
+    
+
 };
