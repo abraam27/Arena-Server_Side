@@ -94,6 +94,22 @@ var SendEmailPw = async (req, res)=>{
     }else{
         res.status(400).send("Not sent !");
     }
+    var GetAllNextGamesByPlayerID = async (req, res)=>{
+        let games = await PlayerServices.GetAllNextGamesByPlayerID(req.params.id)
+        if(games){
+            res.status(201).json(games);
+        }else{
+            res.status(400).send("there is no games !");
+        }
+    };
+    var GetAllPreviousGamesByPlayerID = async (req, res)=>{
+        let games = await PlayerServices.GetAllPreviousGamesByPlayerID(req.params.id)
+        if(games){
+            res.status(201).json(games);
+        }else{
+            res.status(400).send("there is no games !");
+        }
+    };
 };
 module.exports = {
     GetAllPlayers,
@@ -105,5 +121,7 @@ module.exports = {
     UpdateImage,
     ChangeSatus,
     ResetPassword,
-    SendEmailPw
+    SendEmailPw,
+    GetAllPreviousGamesByPlayerID,
+    GetAllNextGamesByPlayerID
 };
