@@ -81,10 +81,26 @@ class PlayerServices{
             return false;
         }
     }
-    static SendEmailPw (fullName,email,userName){
-         nodemailer.sendResetEmail(fullName,email,userName);
+    static SendEmailPw (email){
+         nodemailer.sendResetEmail(email);
          return true
     }
+    static async GetAllNextGamesByPlayerID (playerID){
+        var date = new Date();
+        var month = (date.getMonth() + 1)<10 ? ("0" + (date.getMonth() + 1)) : date.getMonth() + 1;
+        var day = date.getDate()<10 ? "0" + date.getDate() : date.getDate();
+        var currentDate = `${date.getFullYear()}/${month}/${day}`;
+        let games = await Game.find({playerId:"1", $or:[{date :{$gt: currentDate}}, {$and:[{date:currentDate},{hour :{$gt:(date.getHours+1)}}]}]}).exec();//null
+        return games;
+      }
+      static async GetAllPreviousGamesByPlayerID (playerID){
+        var date = new Date();
+        var month = (date.getMonth() + 1)<10 ? ("0" + (date.getMonth() + 1)) : date.getMonth() + 1;
+        var day = date.getDate()<10 ? "0" + date.getDate() : date.getDate();
+        var currentDate = `${date.getFullYear()}/${month}/${day}`;
+        let games = await Game.find({playerId:"1", $or:[{date :{$lt: currentDate}}, {$and:[{date:currentDate},{hour:{$lt:(date.getHours+1)}}]}]}).exec();//null
+        return games;
+      }
 
 }
 module.exports = PlayerServices;

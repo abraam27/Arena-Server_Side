@@ -21,20 +21,20 @@ module.exports.sendConfirmationEmail = (fullName, email, userName) => {
       html: `<h1>Email Confirmation</h1>
           <h2>Hello ${fullName}</h2>
           <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-          <a href=http://localhost:7500/confirm/${userName}> Click here</a>
+          <a href=http://localhost:3000/confirm-email/${userName}> Click here</a>
           </div>`,
     }).catch(err => console.log(err));
   };
-  module.exports.sendResetEmail = (fullName, email, userName) => {
+  module.exports.sendResetEmail = ( email) => {
     console.log("Check");
     transport.sendMail({
       from: user,
       to: email,
       subject: "reset your password account",
       html: `<h1>reset password</h1>
-          <h2>Hello ${fullName}</h2>
+          <h2>Hello</h2>
           <p> Please to reset you password click on the following link</p>
-          <a href=http://localhost:7500/reset/${userName}> Click here</a>
+          <a href=http://localhost:3000/forgot-password/${email}> Click here</a>
           </div>`,
     }).catch(err => console.log(err));
   };

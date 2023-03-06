@@ -31,4 +31,8 @@ router.patch("/changeStatus/:userName",PlayerController.ChangeSatus);
 router.patch("/resetPassword/:userName",PlayerController.ResetPassword);
 // send email to reset password
 router.post("/emailToUpdatePw/:fullName/:email/:userName",PlayerController.SendEmailPw);
+// get the uaser his next games
+router.get("/games/next/:id",PlayerController.GetAllNextGamesByPlayerID);
+// get the uaser his previous games
+router.get("/games/previous/:id",PlayerController.GetAllPreviousGamesByPlayerID);
 module.exports = router;
